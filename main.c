@@ -88,9 +88,9 @@ start = clock(); //Start DGEMM
 //  printf("\n");
 
  // start = clock(); //Start DGEMM
- //    printf("Start DGEMM_intrins_SIMD_Pipelined \n");
+ //    printf("Start DGEMM_CacheBlock \n");
  //    dgemm_block(ROWLEN, a, b, c);
- //    printf("End DGEMM_SIMD_Pipelined \n");
+ //    printf("End DGEMM_CacheBlock \n");
  //    end = clock();
  //    cpu_time_used = ((double)(end - start))/CLOCKS_PER_SEC;
  //    printf("the elapsed CPU time is %lf\n", cpu_time_used);
