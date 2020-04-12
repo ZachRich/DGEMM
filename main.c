@@ -10,6 +10,8 @@
 #include "DGEMM.c"
 #include "DGEMM_SIMD.c"
 #include "DGEMM_SIMD_PIPELINED.c"
+#include "DGEMM_CACHE_BLOCKING.c"
+#include "DGEMM_Cacheblock_No_Optimizations.c"
 
 int main(int argc, char *argv[]) {
     // seed random generator
@@ -54,27 +56,27 @@ int main(int argc, char *argv[]) {
 //
 // printf("\n");
 //
+//start = clock(); //Start DGEMM
+//printf("Start DGEMM \n");
+//DGEMM(ROWLEN,a, b, c);
+//printf("End DGEMM \n");
+//end = clock();
+//cpu_time_used = ((double)(end - start))/CLOCKS_PER_SEC;
+//printf("the elapsed CPU time is %lf\n", cpu_time_used);
+//printf("Clocks per sec: %d\n", CLOCKS_PER_SEC);
+//
+// printf("\n");
+//
 // start = clock(); //Start DGEMM
-// printf("Start DGEMM \n");
-// DGEMM(ROWLEN,a, b, c);
-// printf("End DGEMM \n");
-// end = clock();
-// cpu_time_used = ((double)(end - start))/CLOCKS_PER_SEC;
-// printf("the elapsed CPU time is %lf\n", cpu_time_used);
-// printf("Clocks per sec: %d\n", CLOCKS_PER_SEC);
+//    printf("Start DGEMM_SIMD \n");
+//    DGEMM_SIMD(ROWLEN, a, b, c);
+//    printf("End DGEMM_SIMD \n");
+//    end = clock();
+//    cpu_time_used = ((double)(end - start))/CLOCKS_PER_SEC;
+//    printf("the elapsed CPU time is %lf\n", cpu_time_used);
+//    printf("Clocks per sec: %d\n", CLOCKS_PER_SEC);
 //
 //  printf("\n");
-//
-start = clock(); //Start DGEMM
-   printf("Start DGEMM_SIMD \n");
-   DGEMM_SIMD(ROWLEN, a, b, c);
-   printf("End DGEMM_SIMD \n");
-   end = clock();
-   cpu_time_used = ((double)(end - start))/CLOCKS_PER_SEC;
-   printf("the elapsed CPU time is %lf\n", cpu_time_used);
-   printf("Clocks per sec: %d\n", CLOCKS_PER_SEC);
-
- printf("\n");
 //
 // start = clock(); //Start DGEMM
 //    printf("Start DGEMM_intrins_SIMD_Pipelined \n");
@@ -87,16 +89,28 @@ start = clock(); //Start DGEMM
 //
 //  printf("\n");
 
- // start = clock(); //Start DGEMM
- //    printf("Start DGEMM_CacheBlock \n");
- //    dgemm_block(ROWLEN, a, b, c);
- //    printf("End DGEMM_CacheBlock \n");
- //    end = clock();
- //    cpu_time_used = ((double)(end - start))/CLOCKS_PER_SEC;
- //    printf("the elapsed CPU time is %lf\n", cpu_time_used);
- //    printf("Clocks per sec: %d\n", CLOCKS_PER_SEC);
- //
- //  printf("\n");
+//start = clock(); //Start DGEMM
+//   printf("Start DGEMM_CacheBlock \n");
+//   dgemm_Cacheblock_No_Optimization(ROWLEN, a, b, c);
+//   printf("End DGEMM_CacheBlock \n");
+//   end = clock();
+//   cpu_time_used = ((double)(end - start))/CLOCKS_PER_SEC;
+//   printf("the elapsed CPU time is %lf\n", cpu_time_used);
+//   printf("Clocks per sec: %d\n", CLOCKS_PER_SEC);
+//
+// printf("\n");
+
+
+  start = clock(); //Start DGEMM
+     printf("Start DGEMM_CacheBlock_SIMD_Pipelined \n");
+     dgemm_block(ROWLEN, a, b, c);
+     printf("End DGEMM_CacheBlock_SIMD_Pipelined \n");
+     end = clock();
+     cpu_time_used = ((double)(end - start))/CLOCKS_PER_SEC;
+     printf("the elapsed CPU time is %lf\n", cpu_time_used);
+     printf("Clocks per sec: %d\n", CLOCKS_PER_SEC);
+ 
+   printf("\n");
 
 for (int i = 0; i <  2; i++) {
     for (int j = 0; j < 2; j++) {
