@@ -4,7 +4,7 @@
 #include <immintrin.h>
 #include "DGEMM.h"
 
-const int BLOCKSIZE = 32;
+const int BLOCKSIZE = 16;
 
 void do_block(int n, int si, int sj, int sk, double *A, double *B, double *C) {
     for (int i=si;  i<si+BLOCKSIZE;  i+=UNROLL*4)
